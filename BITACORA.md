@@ -8,6 +8,10 @@ se configuró todo, para así tener todo listo, junto con las librerías corresp
 1. ¿Cuál es la diferencia entre programar la regla y aprender la regla?
 Cuando programo una regla, yo le digo directamente al programa qué tiene que hacer.
 Por ejemplo, si quiero que un ventilador se encienda cuando haga mucho calor, puedo decirle que cuando la temperatura pase de cierto número, encienda el ventilador.
+2. ¿Cuál es tu dominio y cuáles son tus tres tipos de pieza?
+Mi dominio sería clasificación por material-madera / metal / plástico
+3. Describe el bucle de control de tu sistema: qué mide tu sensor, qué tiene que decidir el modelo y qué haría el actuador con cada uno de tus tres tipos.
+Mi sensor mide o detecta el contacto con un objeto conductor, por lo cual podria. Tiene que distinguir en que si es metálico y qué no es metalico. El actuador desviaria los que dieran valor diferente a una caja y los que no den valor a otro.
 
 
 
