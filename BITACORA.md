@@ -5,21 +5,33 @@ he logrado hacer push a github desde el cmd, lo cual yo no sabia xd
 Se creó el repositorio del proyecto en GitHub y se organizó su estructura con las carpetas necesarias para guardar lo que vamos a hacer durante las clases.
 se configuró todo, para así tener todo listo, junto con las librerías correspondientes
 
-1. ¿Cuál es la diferencia entre programar la regla y aprender la regla?
-Cuando programo una regla, yo le digo directamente al programa qué tiene que hacer.
-Por ejemplo, si quiero que un ventilador se encienda cuando haga mucho calor, puedo decirle que cuando la temperatura pase de cierto número, encienda el ventilador.
-2. ¿Cuál es tu dominio y cuáles son tus tres tipos de pieza?
-Mi dominio sería clasificación por material-madera / metal / plástico
-3. Describe el bucle de control de tu sistema: qué mide tu sensor, qué tiene que decidir el modelo y qué haría el actuador con cada uno de tus tres tipos.
-Mi sensor mide o detecta el contacto con un objeto conductor, por lo cual podria. Tiene que distinguir en que si es metálico y qué no es metalico. El actuador desviaria los que dieran valor diferente a una caja y los que no den valor a otro.
-
-
-
 este es el procedimiento para hacer push:
 -para hacer un push primero edito mi archivo
 -luego hago git add .
 -luego git commit
 -luego git push
+
+1. ¿Cuál es la diferencia entre programar la regla y aprender la regla?
+Cuando programo una regla, yo le digo directamente al programa qué tiene que hacer.
+Por ejemplo, si quiero que un ventilador se encienda cuando haga mucho calor, puedo decirle que cuando la temperatura pase de cierto número, encienda el ventilador.
+2. ¿Cuál es tu dominio y cuáles son tus tres tipos de pieza?
+Mi dominio sería clasificación por estado, clasificará si la tapa está bien puesta/ floja/ sin tapa
+3. Describe el bucle de control de tu sistema: qué mide tu sensor, qué tiene que decidir el modelo y qué haría el actuador con cada uno de tus tres tipos.
+Mi sensor detecta la presencia de un objeto mediante luz infraroja, en este caso, detectaria si hay o no una tapa frente al sensor. Mientras que el actuador cuando la botella este cerrada, no realiazaria accciones, y sin tapa separaria el recipiente.
+
+1. Qué sensor vas a usar y qué tipo de salida tiene.
+el KY-032, los valores que entregaria serian 0 y 1.
+
+2. Tres líneas de ejemplo tal como se van a ver saliendo de tu Arduino, con valores plausibles para tu caso.
+0
+1
+0
+
+3. Por qué el Arduino no puede mandar Serial.println("Leyendo...").
+Esto se debe a que el Arduino solamente manda datos, puesto que si lo llevara romperia a Python cuando lo intente convertir a numeros.
+
+
+
 
 ### Avance del proyecto
 Por el momento corregí lo que tenia mal
