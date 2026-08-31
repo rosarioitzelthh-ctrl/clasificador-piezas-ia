@@ -31,7 +31,11 @@ el KY-032, los valores que entregaria serian 0 y 1.
 Esto se debe a que el Arduino solamente manda datos, puesto que si lo llevara romperia a Python cuando lo intente convertir a numeros.
 
 
-
-
+1. ¿Cuánto tarda tu pieza en cruzar frente al sensor? Es una estimación, mídelo a ojo o con el cronómetro del celular.
+2 segundos.
+2. Con ese tiempo, ¿qué delay() eliges para tener al menos 20 muestras del evento?
+Un delay(100), asi cada muestra se toma cada 0.1 segundos, en 2 segundos habría 20 muestras.
+3. ¿Cuántas muestras te da eso mientras la pieza pasa?
+aprox. 20 muestras.
 ### Avance del proyecto
 Por el momento corregí lo que tenia mal
