@@ -3,7 +3,7 @@ Este proyecto es para calificar piezas de ia
 no se que poner 
 Alumna: ROSARIO ITZELTH HERNANDEZ BARAJAS
 Código: 220723262
-Dominio: clasificación por material - madera/ plastico / metal
+Dominio: clasificación por por estado - tapa está bien puesta/ floja/ sin tapa
 
 ## Descripción
 
