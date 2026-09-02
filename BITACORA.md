@@ -37,5 +37,33 @@ Esto se debe a que el Arduino solamente manda datos, puesto que si lo llevara ro
 Un delay(100), asi cada muestra se toma cada 0.1 segundos, en 2 segundos habría 20 muestras.
 3. ¿Cuántas muestras te da eso mientras la pieza pasa?
 aprox. 20 muestras.
+
+Semana 3 - Recolección de datos etiquetados (U2)
+
+1. Columnas de mi datos.csv
+Columna	¿Qué guarda?
+ventana -El número de la pasada o evento que registró el sensor.
+t-El número de muestra dentro de esa ventana.
+valor-La lectura que obtiene el sensor.
+etiqueta-Indica si la pieza está tapada, mal tapada o no tapada.
+
+2. Mis tres etiquetas
+Mis tres etiquetas serán:
+
+tapado
+mal_tapado
+no_tapado
+
+ojo, escribir en minúsculas y sin acentos para evitar problemas al trabajar con el archivo.
+
+3. Cinco filas de ejemplo de mi tabla
+ventana,t,valor,etiqueta
+0,0,512,tapado
+0,1,510,tapado
+0,2,508,tapado
+1,0,620,mal_tapado
+1,1,615,mal_tapado
+
+
 ### Avance del proyecto
 Por el momento corregí lo que tenia mal
