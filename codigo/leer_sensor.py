@@ -51,4 +51,4 @@ plt.savefig("../figuras/senal.png")
 # Mostrar la gráfica
 plt.show()
 
-print("Gráfica guardada en ../figuras/senal.png")
+print("Gráfica guardada en ../figuras/senal.png") 
