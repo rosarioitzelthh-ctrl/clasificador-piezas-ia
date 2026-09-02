@@ -64,6 +64,37 @@ ventana,t,valor,etiqueta
 1,0,620,mal_tapado
 1,1,615,mal_tapado
 
+Bloque 2 
+
+1. Cuántas ventanas por clase
+
+Voy a capturar 30 ventanas por cada clase, teniendo un total de 90 ventanas.
+Mis tres clases serán:
+
+mal_tapado
+no_tapado
+tapado
+
+2. Orden de las pasadas
+
+Voy a alternar las clases para que los datos queden repartidos durante toda la captura:
+
+tapado → mal_tapado → no_tapado → tapado → mal_tapado → no_tapado
+
+Y repetiré este orden hasta completar las 30 ventanas de cada clase.
+
+3. Cómo voy a mantener pareja la velocidad
+
+Para que la velocidad sea lo más parecida posible, voy a marcar con cinta en la mesa el punto donde empieza y termina el recorrido. La pieza recorrerá aproximadamente 20 cm y trataré de hacer cada pasada en aproximadamente 2 segundo.
+
+También voy a intentar mantener el mismo movimiento y no cambiar la velocidad dependiendo de la clase de pieza.
+
+4. Distancia del sensor
+
+Voy a colocar el sensor KY-032 en una posición fija y la pieza pasará aproximadamente a 5 cm del sensor. Voy a marcar la posición para que todas las piezas pasen por el mismo lugar.
+
+El sensor permanecerá fijo durante toda la captura para evitar que la distancia cambie entre una prueba y otra.
+
 
 ### Avance del proyecto
 Por el momento corregí lo que tenia mal
