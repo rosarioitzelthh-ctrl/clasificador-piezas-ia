@@ -96,5 +96,21 @@ Voy a colocar el sensor KY-032 en una posición fija y la pieza pasará aproxima
 El sensor permanecerá fijo durante toda la captura para evitar que la distancia cambie entre una prueba y otra.
 
 
+Semana 4 - Limpieza y normalización de señales (U2)
+
+
+1. ¿Qué tipo de ruido ves en tu señal y de dónde crees que viene?**
+
+Se ven pequeñas variaciones en la señal. Pueden venir del sensor o de cambios en el ambiente.
+
+2. ¿Qué rango físico tiene tu sensor y qué valores estás descartando por imposibles?**
+
+El KY-032 da valores digitales de **0 y 1**. Cualquier otro valor sería incorrecto y se descarta.
+
+3. ¿Qué tamaño de filtro elegiste y por qué?**
+
+Elegí un filtro de tamaño **5** porque ayuda a reducir pequeñas variaciones sin cambiar demasiado la señal.
+
+
 ### Avance del proyecto
 Por el momento corregí lo que tenia mal
