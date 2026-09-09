@@ -1,115 +1,182 @@
 # Bitácora del proyecto
+
 ## Semana 1 - Encuadre y configuración del entorno
+
 ### Antes de la clase
-he logrado hacer push a github desde el cmd, lo cual yo no sabia xd
+
+He logrado hacer push a GitHub desde el CMD, lo cual yo no sabía xd.
+
 Se creó el repositorio del proyecto en GitHub y se organizó su estructura con las carpetas necesarias para guardar lo que vamos a hacer durante las clases.
-se configuró todo, para así tener todo listo, junto con las librerías correspondientes
 
-este es el procedimiento para hacer push:
--para hacer un push primero edito mi archivo
--luego hago git add .
--luego git commit
--luego git push
+También se configuró todo para tener listo el entorno y las librerías que vamos a utilizar.
 
-1. ¿Cuál es la diferencia entre programar la regla y aprender la regla?
+Este es el procedimiento que sigo para hacer un push:
+
+* Primero edito mi archivo.
+* Luego hago `git add .`
+* Después hago `git commit`.
+* Finalmente hago `git push`.
+
+### Preguntas
+
+**1. ¿Cuál es la diferencia entre programar la regla y aprender la regla?**
+
 Cuando programo una regla, yo le digo directamente al programa qué tiene que hacer.
+
 Por ejemplo, si quiero que un ventilador se encienda cuando haga mucho calor, puedo decirle que cuando la temperatura pase de cierto número, encienda el ventilador.
-2. ¿Cuál es tu dominio y cuáles son tus tres tipos de pieza?
-Mi dominio sería clasificación por estado, clasificará si la tapa está bien puesta/ floja/ sin tapa
-3. Describe el bucle de control de tu sistema: qué mide tu sensor, qué tiene que decidir el modelo y qué haría el actuador con cada uno de tus tres tipos.
-Mi sensor detecta la presencia de un objeto mediante luz infraroja, en este caso, detectaria si hay o no una tapa frente al sensor. Mientras que el actuador cuando la botella este cerrada, no realiazaria accciones, y sin tapa separaria el recipiente.
 
-1. Qué sensor vas a usar y qué tipo de salida tiene.
-el KY-032, los valores que entregaria serian 0 y 1.
+**2. ¿Cuál es tu dominio y cuáles son tus tres tipos de pieza?**
 
-2. Tres líneas de ejemplo tal como se van a ver saliendo de tu Arduino, con valores plausibles para tu caso.
-0
-1
-0
+Mi proyecto será para clasificar el estado de una botella. Se clasificará si la tapa está bien puesta, está mal puesta o no tiene tapa.
 
-3. Por qué el Arduino no puede mandar Serial.println("Leyendo...").
-Esto se debe a que el Arduino solamente manda datos, puesto que si lo llevara romperia a Python cuando lo intente convertir a numeros.
+Mis tres tipos de pieza serán:
 
+* tapado
+* mal_tapado
+* no_tapado
 
-1. ¿Cuánto tarda tu pieza en cruzar frente al sensor? Es una estimación, mídelo a ojo o con el cronómetro del celular.
-2 segundos.
-2. Con ese tiempo, ¿qué delay() eliges para tener al menos 20 muestras del evento?
-Un delay(100), asi cada muestra se toma cada 0.1 segundos, en 2 segundos habría 20 muestras.
-3. ¿Cuántas muestras te da eso mientras la pieza pasa?
-aprox. 20 muestras.
+**3. Describe el bucle de control de tu sistema: qué mide tu sensor, qué tiene que decidir el modelo y qué haría el actuador con cada uno de tus tres tipos.**
 
-Semana 3 - Recolección de datos etiquetados (U2)
+Mi sensor medirá la distancia entre el sensor y la botella mediante ondas ultrasónicas.
 
-1. Columnas de mi datos.csv
-Columna	¿Qué guarda?
-ventana -El número de la pasada o evento que registró el sensor.
-t-El número de muestra dentro de esa ventana.
-valor-La lectura que obtiene el sensor.
-etiqueta-Indica si la pieza está tapada, mal tapada o no tapada.
+El modelo tendrá que decidir si la botella está tapada, mal tapada o no tiene tapa.
 
-2. Mis tres etiquetas
+Cuando la botella esté bien tapada, no se realizaría ninguna acción. Si está mal tapada o no tiene tapa, el sistema podría separar la botella para revisarla.
+
+---
+
+# Semana 2 - Lectura del sensor
+
+### 1. ¿Qué sensor vas a usar y qué tipo de salida tiene?
+
+Voy a utilizar un sensor ultrasónico **HC-SR04**.
+
+El sensor mide la distancia que hay entre él y la pieza, y entrega un valor en centímetros.
+
+### 2. Tres líneas de ejemplo tal como se van a ver saliendo de tu Arduino
+
+```text
+24.52
+24.31
+23.87
+```
+
+Estos valores representan la distancia aproximada entre el sensor y la pieza.
+
+### 3. ¿Por qué el Arduino no puede mandar `Serial.println("Leyendo...")`?
+
+Esto se debe a que Python espera recibir números para poder trabajar con los datos del sensor.
+
+Si Arduino manda palabras junto con las lecturas, Python podría tener problemas al intentar convertirlas en números.
+
+---
+
+# Semana 3 - Recolección de datos etiquetados
+
+### Bloque 1
+
+**1. ¿Cuánto tarda tu pieza en cruzar frente al sensor?**
+
+Aproximadamente 5 segundos.
+
+**2. Con ese tiempo, ¿qué `delay()` eliges para tener al menos 20 muestras del evento?**
+
+Elegí un `delay(100)`, porque se toma una muestra cada 0.1 segundos. En aproximadamente 2 segundos tendría unas 20 muestras.
+
+**3. ¿Cuántas muestras te da eso mientras la pieza pasa?**
+
+Aproximadamente 20 muestras.
+
+---
+
+### Mis datos
+
+**1. Columnas de mi `datos.csv`**
+
+| Columna  | ¿Qué guarda?                                            |
+| -------- | ------------------------------------------------------- |
+| ventana  | El número de la pasada o evento que registró el sensor. |
+| t        | El número de muestra dentro de esa ventana.             |
+| valor    | La distancia que obtiene el sensor en centímetros.      |
+| etiqueta | Indica si la pieza está tapada, mal tapada o no tapada. |
+
+**2. Mis tres etiquetas**
+
 Mis tres etiquetas serán:
 
-tapado
-mal_tapado
-no_tapado
+* `tapado`
+* `mal_tapado`
+* `no_tapado`
 
-ojo, escribir en minúsculas y sin acentos para evitar problemas al trabajar con el archivo.
+Las escribiré en minúsculas y sin acentos para evitar problemas con el archivo.
 
-3. Cinco filas de ejemplo de mi tabla
+**3. Cinco filas de ejemplo de mi tabla**
+
+```text
 ventana,t,valor,etiqueta
-0,0,512,tapado
-0,1,510,tapado
-0,2,508,tapado
-1,0,620,mal_tapado
-1,1,615,mal_tapado
+0,0,24.52,tapado
+0,1,24.48,tapado
+0,2,24.51,tapado
+1,0,20.31,mal_tapado
+1,1,20.15,mal_tapado
+```
 
-Bloque 2 
+---
 
-1. Cuántas ventanas por clase
+## Bloque 2 - Protocolo de recolección
+
+### 1. ¿Cuántas ventanas por clase?
 
 Voy a capturar 30 ventanas por cada clase, teniendo un total de 90 ventanas.
+
 Mis tres clases serán:
 
-mal_tapado
-no_tapado
-tapado
+* `mal_tapado`
+* `no_tapado`
+* `tapado`
 
-2. Orden de las pasadas
+### 2. Orden de las pasadas
 
 Voy a alternar las clases para que los datos queden repartidos durante toda la captura:
 
-tapado → mal_tapado → no_tapado → tapado → mal_tapado → no_tapado
+**tapado → mal_tapado → no_tapado → tapado → mal_tapado → no_tapado**
 
 Y repetiré este orden hasta completar las 30 ventanas de cada clase.
 
-3. Cómo voy a mantener pareja la velocidad
+### 3. ¿Cómo voy a mantener pareja la velocidad?
 
-Para que la velocidad sea lo más parecida posible, voy a marcar con cinta en la mesa el punto donde empieza y termina el recorrido. La pieza recorrerá aproximadamente 20 cm y trataré de hacer cada pasada en aproximadamente 2 segundo.
+Para que la velocidad sea lo más parecida posible, voy a marcar con cinta en la mesa el punto donde empieza y termina el recorrido.
+
+La pieza recorrerá aproximadamente 20 cm y trataré de hacer cada pasada en aproximadamente 2 segundos.
 
 También voy a intentar mantener el mismo movimiento y no cambiar la velocidad dependiendo de la clase de pieza.
 
-4. Distancia del sensor
+### 4. Distancia del sensor
 
-Voy a colocar el sensor KY-032 en una posición fija y la pieza pasará aproximadamente a 5 cm del sensor. Voy a marcar la posición para que todas las piezas pasen por el mismo lugar.
+Voy a colocar el sensor HC-SR04 en una posición fija y la pieza pasará aproximadamente a 5 cm del sensor.
+
+Voy a marcar la posición para que todas las piezas pasen por el mismo lugar.
 
 El sensor permanecerá fijo durante toda la captura para evitar que la distancia cambie entre una prueba y otra.
 
+---
 
-Semana 4 - Limpieza y normalización de señales (U2)
+# Semana 4 - Limpieza y normalización de señales
 
+### 1. ¿Qué tipo de ruido ves en tu señal y de dónde crees que viene?
 
-1. ¿Qué tipo de ruido ves en tu señal y de dónde crees que viene?**
+Se ven pequeñas variaciones en las mediciones de distancia. Pueden venir de pequeñas diferencias al mover la pieza, del sensor o de cambios en el ambiente.
 
-Se ven pequeñas variaciones en la señal. Pueden venir del sensor o de cambios en el ambiente.
+### 2. ¿Qué rango físico tiene tu sensor y qué valores estás descartando por imposibles?
 
-2. ¿Qué rango físico tiene tu sensor y qué valores estás descartando por imposibles?**
+El HC-SR04 mide distancias en centímetros. Para mi proyecto, la pieza estará aproximadamente a 5 cm del sensor.
 
-El KY-032 da valores digitales de **0 y 1**. Cualquier otro valor sería incorrecto y se descarta.
+Voy a descartar valores que estén fuera del rango que estoy utilizando para la captura o que sean claramente incorrectos.
 
-3. ¿Qué tamaño de filtro elegiste y por qué?**
+### 3. ¿Qué tamaño de filtro elegiste y por qué?
 
-Elegí un filtro de tamaño **5** porque ayuda a reducir pequeñas variaciones sin cambiar demasiado la señal.
+Elegí un filtro de tamaño **5** porque ayuda a reducir pequeñas variaciones en las mediciones y permite que la señal se vea más pareja sin cambiar demasiado los datos originales.
+
 
 
 ### Avance del proyecto

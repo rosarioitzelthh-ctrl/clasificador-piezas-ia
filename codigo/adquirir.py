@@ -3,7 +3,7 @@ import serial
 import time
 import csv
 
-PUERTO = 'COM3'          # el tuyo puede ser otro: COM4, COM5...
+PUERTO = 'COM4'          # el tuyo puede ser otro: COM4, COM5...
 BAUDIOS = 115200
 N_MUESTRAS = 200          # largo de cada ventana
 ARCHIVO = 'datos/datos.csv'
