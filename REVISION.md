@@ -14,3 +14,6 @@ tus figuras en `figuras/` y la demo del bucle de control.
 
 ### Nota rápida (2026-09-14)
 Tu `sensor.ino.txt` quedó con doble extensión (`.ino.txt` en vez de `.ino`). El Arduino IDE necesita que el archivo termine en `.ino` y se llame igual que su carpeta, así que esto te va a estorbar el día de hardware. Corrígelo antes de la próxima sesión. (El truco de meter un `.txt` para que Git suba las carpetas vacías `datos/` y `figuras/` sí está bien pensado, solo cuida que no se te haya ido también al `.ino`.)
+
+### Nota rápida (2026-09-14) - s02
+El `sensor.ino.txt` con doble extensión que te comenté la semana pasada sigue igual, y ahora se agregó otra copia en `codigo/codigo_arduino/codigo_arduino.ino`. El archivo que el curso espera es `codigo/sensor.ino`, tal cual, sin extensión doble ni subcarpeta. Vale la pena resolverlo antes del día de hardware, porque el Arduino IDE necesita ese nombre exacto para poder abrirlo.
