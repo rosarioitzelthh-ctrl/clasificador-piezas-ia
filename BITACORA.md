@@ -163,21 +163,34 @@ El sensor permanecerá fijo durante toda la captura para evitar que la distancia
 
 # Semana 4 - Limpieza y normalización de señales
 
-### 1. ¿Qué tipo de ruido ves en tu señal y de dónde crees que viene?
+#### 1. ¿Qué tipo de ruido ves en tu señal y de dónde crees que viene?
 
-Se ven pequeñas variaciones en las mediciones de distancia. Pueden venir de pequeñas diferencias al mover la pieza, del sensor o de cambios en el ambiente.
+Se observan variaciones y algunos cambios repentinos en las lecturas del sensor. Considero que este ruido puede venir de pequeñas variaciones en la posición de la botella, del movimiento que pueda tener a causa del pulso de mi mano y de cambios en la distancia que detecta el sensor ultrasónico. También pueden existir pequeñas variaciones propias de las lecturas del sensor.
 
-### 2. ¿Qué rango físico tiene tu sensor y qué valores estás descartando por imposibles?
+#### 2. ¿Qué rango físico tiene tu sensor y qué valores estás descartando por imposibles?
 
-El HC-SR04 mide distancias en centímetros. Para mi proyecto, la pieza estará aproximadamente a 5 cm del sensor.
+El sensor ultrasónico HC-SR04 tiene un rango aproximado de 2 a 400 cm. Por eso, en la limpieza se descartan los valores menores o iguales a 0 y los valores mayores a 400 cm, ya que están fuera del rango físico que puede medir el sensor.
 
-Voy a descartar valores que estén fuera del rango que estoy utilizando para la captura o que sean claramente incorrectos.
+#### 3. ¿Qué tamaño de filtro elegiste y por qué, en relación con la duración de tu evento?
 
-### 3. ¿Qué tamaño de filtro elegiste y por qué?
+Se eligió un filtro de media móvil de 5 muestras. Se escogió este tamaño porque permite reducir pequeñas variaciones y ruido sin modificar demasiado la forma de la señal. Como cada ventana contiene 200 muestras, el filtro de 5 muestras es pequeño en comparación con la duración completa del evento y permite conservar los cambios importantes de la señal.
+## Bloque 2
 
-Elegí un filtro de tamaño **5** porque ayuda a reducir pequeñas variaciones en las mediciones y permite que la señal se vea más pareja sin cambiar demasiado los datos originales.
+### Resultados de la limpieza
 
+#### 1. ¿Cuánto se movió tu línea base entre la primera y la última ventana de la sesión?
 
+La línea base se calculó utilizando el promedio de las primeras muestras de cada ventana. Al comparar la primera y la última ventana se observa que existe un cambio en la línea base, por lo que fue necesario corregirla antes de realizar la normalización.
+
+El movimiento de la línea base fue de **32.83 cm** entre la primera y la última ventana.
+
+#### 2. ¿Qué normalización elegiste y por qué?
+
+Se utilizó una normalización Min-Max. Se eligió porque permite llevar los valores de cada ventana a un rango entre 0 y 1. Esto facilita la comparación entre las diferentes ventanas y evita que las diferencias de escala afecten demasiado al clasificador.
+
+#### 3. Al comparar antes y después: ¿se parecen más entre sí las ventanas de una misma clase?
+
+Después de aplicar el filtrado, la corrección de la línea base y la normalización, las señales presentan menos variaciones causadas por el ruido y son más fáciles de comparar. Las ventanas de una misma clase muestran un comportamiento más parecido que antes de realizar la limpieza, aunque todavía existen algunas diferencias debido a las lecturas del sensor y a la posición de la botella.
 
 ### Avance del proyecto
 Por el momento corregí lo que tenia mal

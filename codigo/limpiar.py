@@ -108,6 +108,17 @@ datos['valor_corregido'] = (
     - datos['ventana'].map(base)
 )
 
+print("\nLinea base:")
+print(base)
+
+primera_ventana = base.index.min()
+ultima_ventana = base.index.max()
+
+movimiento_base = abs(base[ultima_ventana] - base[primera_ventana])
+
+print(f"\nPrimera ventana: {primera_ventana}")
+print(f"Ultima ventana: {ultima_ventana}")
+print(f"Movimiento de la linea base: {movimiento_base:.2f} cm")
 
 # ==================================================
 # 8. NORMALIZAR
@@ -131,83 +142,61 @@ datos['valor_normalizado'] = (
 # 9. CREAR GRAFICA DE ANTES Y DESPUES
 # ==================================================
 
-# Buscamos una clase que tenga al menos dos ventanas.
+# ==================================================
+# 9. CREAR GRAFICA DE LAS 3 CLASES
+# ==================================================
 
-clase_ejemplo = datos['etiqueta'].iloc[0]
+# Obtener todas las clases disponibles
+clases = datos['etiqueta'].dropna().unique()
 
-ventanas_clase = (
-    datos[datos['etiqueta'] == clase_ejemplo]
-    ['ventana']
-    .unique()
+plt.figure(figsize=(12, 7))
+
+for clase in clases:
+
+    # Buscar las ventanas pertenecientes a esta clase
+    ventanas_clase = (
+        datos[datos['etiqueta'] == clase]['ventana']
+        .unique()
+    )
+
+    if len(ventanas_clase) > 0:
+
+        # Tomar la primera ventana de cada clase
+        ventana = ventanas_clase[0]
+
+        datos_clase = datos[
+            datos['ventana'] == ventana
+        ]
+
+        # Graficar los datos normalizados
+        plt.plot(
+            datos_clase['t'],
+            datos_clase['valor_normalizado'],
+            label=f'{clase} - ventana {ventana}'
+        )
+
+plt.xlabel('Muestra')
+plt.ylabel('Valor normalizado')
+plt.title('Comparacion de las tres clases')
+
+plt.legend()
+plt.grid()
+
+plt.savefig(
+    ruta_figura,
+    dpi=300,
+    bbox_inches='tight'
 )
 
-if len(ventanas_clase) >= 2:
+plt.close()
 
-    ventana_inicial = ventanas_clase[0]
-    ventana_final = ventanas_clase[-1]
+print("\nGrafica creada:")
+print(ruta_figura)
 
-    datos_inicial = datos[
-        datos['ventana'] == ventana_inicial
-    ]
+print("\nClases encontradas en los datos:")
 
-    datos_final = datos[
-        datos['ventana'] == ventana_final
-    ]
-
-    plt.figure(figsize=(10, 6))
-
-    # Ventana inicial antes de limpiar
-    plt.plot(
-        datos_inicial['t'],
-        datos_inicial['valor'],
-        label=f'Inicial - ventana {ventana_inicial}'
-    )
-
-    # Ventana final antes de limpiar
-    plt.plot(
-        datos_final['t'],
-        datos_final['valor'],
-        label=f'Final - ventana {ventana_final}'
-    )
-
-    # Ventana inicial después de limpiar
-    plt.plot(
-        datos_inicial['t'],
-        datos_inicial['valor_normalizado'],
-        label='Inicial - normalizada'
-    )
-
-    # Ventana final después de limpiar
-    plt.plot(
-        datos_final['t'],
-        datos_final['valor_normalizado'],
-        label='Final - normalizada'
-    )
-
-    plt.xlabel('Muestra')
-    plt.ylabel('Valor')
-    plt.title(
-        f'Comparacion antes y despues de limpiar - {clase_ejemplo}'
-    )
-
-    plt.legend()
-    plt.grid()
-
-    plt.savefig(
-        ruta_figura,
-        dpi=300,
-        bbox_inches='tight'
-    )
-
-    plt.close()
-
-    print("\nGrafica creada:")
-    print(ruta_figura)
-
-else:
-
-    print("\nTodavia no hay dos ventanas de la misma clase.")
-    print("La grafica se generara cuando tengas suficientes datos.")
+for clase in clases:
+    print(f"- {clase}")
 
 
 # ==================================================
