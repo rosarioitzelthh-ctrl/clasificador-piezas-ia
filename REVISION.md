@@ -17,3 +17,6 @@ Tu `sensor.ino.txt` quedó con doble extensión (`.ino.txt` en vez de `.ino`). E
 
 ### Nota rápida (2026-09-14) - s02
 El `sensor.ino.txt` con doble extensión que te comenté la semana pasada sigue igual, y ahora se agregó otra copia en `codigo/codigo_arduino/codigo_arduino.ino`. El archivo que el curso espera es `codigo/sensor.ino`, tal cual, sin extensión doble ni subcarpeta. Vale la pena resolverlo antes del día de hardware, porque el Arduino IDE necesita ese nombre exacto para poder abrirlo.
+
+### Nota rápida (2026-09-14) - s03
+El problema de `sensor.ino.txt` con doble extensión que se comentó hace dos semanas sigue sin resolverse, y ahora hay dos copias distintas (`codigo/sensor.ino.txt` y `codigo/codigo_arduino/codigo_arduino.ino`), ninguna en la ruta que espera el curso (`codigo/sensor.ino`). El resto de la semana 3 va bien: datos balanceados (10/10/10 en `tapado`/`mal_tapado`/`no_tapado`, aunque todavía por debajo del mínimo de 30 por clase). Vale la pena resolver el nombre del archivo ya, antes del día de hardware.
