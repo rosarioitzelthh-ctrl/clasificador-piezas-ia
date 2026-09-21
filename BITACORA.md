@@ -245,5 +245,36 @@ Si existe un poco de encimamiento, esto significa que algunas ventanas tienen ca
 
 En este bloque convertimos las señales de cada ventana en una tabla de características que será más fácil de utilizar para entrenar el modelo. También comparamos diferentes pares de características mediante gráficas para observar cuáles ayudan más a diferenciar las clases.
 
+
+#   Semana 6 - Características en el dominio de la frecuencia (U2)
+
+#### Bloque 1: Mirar una señal en frecuencia
+
+1. **Frecuencia de muestreo**
+
+En nuestro proyecto estamos tomando aproximadamente **100 muestras por segundo (100 Hz)**. Esto se debe principalmente al `delay(10)` que tenemos en el código del sensor, que representa aproximadamente 10 ms entre muestras.
+
+2. **Frecuencia de Nyquist**
+
+La frecuencia de Nyquist es de **50 Hz**, ya que corresponde a la mitad de nuestra frecuencia de muestreo:
+
+**100 Hz / 2 = 50 Hz**
+
+Esto significa que nuestra señal puede representar frecuencias de hasta aproximadamente 50 Hz. Las frecuencias mayores no se pueden detectar correctamente y pueden provocar aliasing.
+
+3. **Resolución en frecuencia**
+
+Cada ventana que utilizamos tiene **200 muestras**. Por lo tanto, la resolución en frecuencia es:
+
+**100 Hz / 200 = 0.5 Hz**
+
+Esto significa que podemos distinguir cambios en frecuencia aproximadamente cada **0.5 Hz**.
+
+4. **Predicción**
+
+Creo que nuestras clases podrían presentar algunas diferencias en frecuencia, pero no espero que sean demasiado grandes. Nuestro sensor ultrasónico mide la distancia y las diferencias entre las piezas principalmente cambian la forma y el nivel de la señal. Por eso pienso que las características que obtuvimos en el dominio del tiempo podrían ser más útiles, aunque la frecuencia nos puede ayudar a encontrar diferencias que no se notan fácilmente en la gráfica normal.
+
+
+
 ### Avance del proyecto
 Por el momento corregí lo que tenia mal
