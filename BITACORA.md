@@ -288,6 +288,8 @@ Sí ayudan un poco, pero no separan completamente las tres clases. En la gráfic
 
 Yo las conservaría porque pueden aportar información que no se veía tan claramente con las características anteriores. Aunque no separan completamente las clases, pueden servir junto con las demás características para que el programa tenga más información al momento de identificar cada tipo de tapa.
 
+### corección de revisión
+Estoy empezando a trabajar los errores que tenia dentro de mi revison.md y ademas completé la semana 5 y 6.
 
 ### Avance del proyecto
 Por el momento corregí lo que tenia mal
