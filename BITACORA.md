@@ -215,5 +215,35 @@ Creo que la característica que puede ser más útil será el **rango**, porque 
 La característica que creo que puede ser menos útil es el **máximo**, porque puede tener valores parecidos entre algunas piezas y también puede cambiar dependiendo de la posición de la pieza frente al sensor.
 
 
+### Bloque 2: `features.py` y la tabla final
+
+En este bloque trabajamos con el archivo `datos_limpios.csv` para obtener características de cada ventana. El programa agrupa las muestras por ventana y calcula diferentes valores para resumir cada una de ellas.
+
+Las características que obtuvimos fueron la **media, desviación, mínimo, máximo, rango, energía y duración**. También conservamos la columna `ventana`, ya que sirve para saber de qué señal salió cada registro y poder identificar alguna muestra posteriormente.
+
+### 1. ¿Cuántas filas y columnas tiene `features.csv` y por qué?
+
+El archivo `features.csv` quedó con **91 filas y 9 columnas**.
+
+Las filas corresponden a cada ventana que teníamos registrada, por lo que hay una fila por cada pasada o muestra completa de una pieza. Las columnas corresponden a la ventana, las características calculadas y la etiqueta de cada clase.
+
+### 2. ¿Qué par de características separa mejor las clases?
+
+Realizamos diferentes gráficas de dispersión utilizando distintos pares de características para comparar las tres clases.
+
+El par que mejor separa las clases fue **rango_vs_duracion**, ya que en la gráfica se pueden observar las tres clases con una separación más clara entre sus puntos.
+
+También realizamos otras dos combinaciones para comprobar si existía una mejor separación. Esto nos permitió comparar visualmente las características antes de continuar con el clasificador.
+
+### 3. ¿Hay dos clases que se encimen?
+
+Al revisar las gráficas, se puede observar que **minimo_vs_rango y desv_vs_energia** son las graficas que no se estan encimando del todo, pero si estan muy juntos los puntos y es mas difcil diferenciar los datos.
+
+Si existe un poco de encimamiento, esto significa que algunas ventanas tienen características parecidas aunque pertenezcan a clases diferentes. Por ahora, podemos continuar con estas características y posteriormente comprobar qué tan bien funciona el clasificador.
+
+### Conclusión
+
+En este bloque convertimos las señales de cada ventana en una tabla de características que será más fácil de utilizar para entrenar el modelo. También comparamos diferentes pares de características mediante gráficas para observar cuáles ayudan más a diferenciar las clases.
+
 ### Avance del proyecto
 Por el momento corregí lo que tenia mal
