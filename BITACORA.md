@@ -192,5 +192,28 @@ Se utilizó una normalización Min-Max. Se eligió porque permite llevar los val
 
 Después de aplicar el filtrado, la corrección de la línea base y la normalización, las señales presentan menos variaciones causadas por el ruido y son más fáciles de comparar. Las ventanas de una misma clase muestran un comportamiento más parecido que antes de realizar la limpieza, aunque todavía existen algunas diferencias debido a las lecturas del sensor y a la posición de la botella.
 
+## Semana 5 - Características en el dominio del tiempo
+
+### Bloque 1: Selección de características
+
+Para esta semana elegí algunas características que pueden ayudar a diferenciar los tres estados de las tapas: `tapado`, `mal_tapado` y `no_tapado`.
+
+| Característica | Por qué debería distinguir mis clases |
+|---|---|
+| **Media** | Me puede ayudar a conocer cuál fue el valor promedio de la distancia durante la medición. |
+| **Desviación estándar** | Puede mostrar qué tanto cambió la señal mientras la pieza estaba frente al sensor. |
+| **Mínimo** | Puede indicar qué tan cerca llegó la pieza al sensor. |
+| **Máximo** | Me permite conocer cuál fue la distancia más grande registrada durante la ventana. |
+| **Rango** | Puede mostrar qué tanto cambió la distancia entre el valor más pequeño y el más grande. |
+| **Energía** | Resume los cambios que tuvo la señal durante toda la ventana. |
+| **Duración** | Puede ayudar a saber cuánto tiempo estuvo la pieza frente al sensor. |
+
+### Mi predicción
+
+Creo que la característica que puede ser más útil será el **rango**, porque puede mostrar qué tanto cambia la distancia cuando la tapa está bien puesta, floja o no está puesta.
+
+La característica que creo que puede ser menos útil es el **máximo**, porque puede tener valores parecidos entre algunas piezas y también puede cambiar dependiendo de la posición de la pieza frente al sensor.
+
+
 ### Avance del proyecto
 Por el momento corregí lo que tenia mal
