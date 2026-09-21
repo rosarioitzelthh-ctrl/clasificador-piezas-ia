@@ -274,6 +274,19 @@ Esto significa que podemos distinguir cambios en frecuencia aproximadamente cada
 
 Creo que nuestras clases podrían presentar algunas diferencias en frecuencia, pero no espero que sean demasiado grandes. Nuestro sensor ultrasónico mide la distancia y las diferencias entre las piezas principalmente cambian la forma y el nivel de la señal. Por eso pienso que las características que obtuvimos en el dominio del tiempo podrían ser más útiles, aunque la frecuencia nos puede ayudar a encontrar diferencias que no se notan fácilmente en la gráfica normal.
 
+###  Bloque 2: FFT y características de las señales
+
+**1. ¿Cuál es la frecuencia dominante que observas y qué sentido físico tiene?**
+
+Al ver la gráfica, la mayor parte de la señal se encuentra en las frecuencias bajas. Esto tiene sentido porque el sensor está midiendo la distancia de las botellas y los cambios no ocurren tan rápido. El punto más alto de la gráfica representa la frecuencia que aparece más en la señal.
+
+**2. ¿Las características de frecuencia ayudan a separar las clases? ¿Qué observas en la gráfica?**
+
+Sí ayudan un poco, pero no separan completamente las tres clases. En la gráfica se pueden notar algunas diferencias entre las señales, aunque en algunas partes se parecen bastante. Por eso creo que estas características pueden servir como apoyo, pero no serían suficientes por sí solas para distinguir si la tapa está bien puesta, floja o si no tiene tapa.
+
+**3. ¿Conservarías o eliminarías las características de frecuencia? ¿Por qué?**
+
+Yo las conservaría porque pueden aportar información que no se veía tan claramente con las características anteriores. Aunque no separan completamente las clases, pueden servir junto con las demás características para que el programa tenga más información al momento de identificar cada tipo de tapa.
 
 
 ### Avance del proyecto

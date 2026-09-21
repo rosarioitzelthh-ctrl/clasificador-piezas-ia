@@ -1,5 +1,5 @@
 # features.py
-# Convierte cada ventana de datos en una fila de características
+# Calcula características de tiempo y de frecuencia para cada ventana
 
 import pandas as pd
 import numpy as np
@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 import os
 
 
-# ======================================
+# ============================================================
 # RUTAS
-# ======================================
+# ============================================================
 
 carpeta_codigo = os.path.dirname(os.path.abspath(__file__))
 carpeta_proyecto = os.path.dirname(carpeta_codigo)
@@ -23,72 +23,174 @@ ruta_salida = os.path.join(carpeta_datos, 'features.csv')
 os.makedirs(carpeta_figuras, exist_ok=True)
 
 
-# ======================================
-# COMPROBAR QUE EXISTE EL ARCHIVO
-# ======================================
+# ============================================================
+# CONFIGURACION
+# ============================================================
+
+FS = 100.0       # Frecuencia de muestreo aproximada
+UMBRAL = 5
+
+
+# ============================================================
+# COMPROBAR ARCHIVO
+# ============================================================
 
 if not os.path.exists(ruta_entrada):
-    print("No se encontro datos_limpios.csv.")
-    print("Primero ejecuta limpiar.py.")
+    print("No se encontro datos_limpios.csv")
+    print("Primero ejecuta limpiar.py")
     exit()
 
 
-# ======================================
-# LEER LOS DATOS
-# ======================================
+# ============================================================
+# LEER DATOS
+# ============================================================
 
 datos = pd.read_csv(ruta_entrada)
 
+print("======================================")
+print("   CALCULANDO FEATURES")
+print("======================================")
 
-# ======================================
-# CALCULAR CARACTERISTICAS
-# ======================================
+
+# ============================================================
+# CALCULAR FEATURES
+# ============================================================
 
 filas = []
-
-# Umbral utilizado para calcular la duracion
-UMBRAL = 5
 
 for ventana, g in datos.groupby('ventana'):
 
     x = g['valor'].values
-
     etiqueta = g['etiqueta'].iloc[0]
+
+    # --------------------------------------------------------
+    # FEATURES DE TIEMPO
+    # --------------------------------------------------------
+
+    media = x.mean()
+    desv = x.std()
+    minimo = x.min()
+    maximo = x.max()
+    rango = maximo - minimo
+    energia = np.sum(x ** 2)
+    duracion = np.sum(np.abs(x) > UMBRAL)
+
+    # --------------------------------------------------------
+    # FFT
+    # --------------------------------------------------------
+
+    espectro = np.abs(np.fft.rfft(x))[1:]
+
+    frecuencias = np.fft.rfftfreq(
+        len(x),
+        1 / FS
+    )[1:]
+
+    # Frecuencia dominante
+    if len(espectro) > 0:
+        f_dominante = frecuencias[np.argmax(espectro)]
+    else:
+        f_dominante = 0
+
+    # Centroide espectral
+    if np.sum(espectro) > 0:
+        centroide = np.sum(
+            frecuencias * espectro
+        ) / np.sum(espectro)
+    else:
+        centroide = 0
+
+    # Energia espectral
+    energia_espectral = np.sum(espectro ** 2)
+
+    # --------------------------------------------------------
+    # BANDAS DE FRECUENCIA
+    # --------------------------------------------------------
+
+    banda_baja = np.sum(
+        espectro[
+            (frecuencias >= 0) &
+            (frecuencias < 10)
+        ] ** 2
+    )
+
+    banda_media = np.sum(
+        espectro[
+            (frecuencias >= 10) &
+            (frecuencias < 25)
+        ] ** 2
+    )
+
+    banda_alta = np.sum(
+        espectro[
+            (frecuencias >= 25) &
+            (frecuencias <= 50)
+        ] ** 2
+    )
+
+    # --------------------------------------------------------
+    # GUARDAR FILA
+    # --------------------------------------------------------
 
     fila = {
         'ventana': ventana,
-        'media': x.mean(),
-        'desv': x.std(),
-        'minimo': x.min(),
-        'maximo': x.max(),
-        'rango': x.max() - x.min(),
-        'energia': np.sum(x ** 2),
-        'duracion': np.sum(np.abs(x) > UMBRAL),
+
+        # Tiempo
+        'media': media,
+        'desv': desv,
+        'minimo': minimo,
+        'maximo': maximo,
+        'rango': rango,
+        'energia': energia,
+        'duracion': duracion,
+
+        # Frecuencia
+        'f_dominante': f_dominante,
+        'centroide': centroide,
+        'energia_espectral': energia_espectral,
+        'banda_baja': banda_baja,
+        'banda_media': banda_media,
+        'banda_alta': banda_alta,
+
         'etiqueta': etiqueta
     }
 
     filas.append(fila)
 
 
-# ======================================
-# CREAR TABLA DE CARACTERISTICAS
-# ======================================
+# ============================================================
+# CREAR TABLA
+# ============================================================
 
 features = pd.DataFrame(filas)
 
 
-# ======================================
-# GUARDAR FEATURES.CSV
-# ======================================
+# ============================================================
+# GUARDAR FEATURES
+# ============================================================
 
-features.to_csv(ruta_salida, index=False)
+try:
+
+    features.to_csv(
+        ruta_salida,
+        index=False
+    )
+
+    print("\nFeatures guardadas correctamente:")
+    print(ruta_salida)
+
+except PermissionError:
+
+    print("\nERROR: No se pudo guardar features.csv")
+    print("Cierra features.csv si esta abierto en Excel o VS Code.")
+    exit()
 
 
-# ======================================
-# MOSTRAR RESULTADOS
-# ======================================
+# ============================================================
+# INFORMACION
+# ============================================================
 
-print("======================================")
+print("\n======================================")
 print("      FEATURES CALCULADAS")
 print("======================================")
 
@@ -103,9 +205,14 @@ print("\nVentanas por clase:")
 print(features.groupby('etiqueta').size())
 
 
-# ======================================
-# PROBAR 3 PARES DE CARACTERISTICAS
-# ======================================
+print("\nColumnas:")
+for columna in features.columns:
+    print("-", columna)
+
+
+# ============================================================
+# GRAFICAS DE FEATURES DE TIEMPO
+# ============================================================
 
 pares = [
     ('rango', 'duracion'),
@@ -119,10 +226,6 @@ nombres = [
     'Desviacion vs Energia'
 ]
 
-
-# ======================================
-# CREAR LAS 3 GRAFICAS
-# ======================================
 
 for i in range(len(pares)):
 
@@ -142,11 +245,12 @@ for i in range(len(pares)):
     plt.xlabel(eje_x)
     plt.ylabel(eje_y)
     plt.title(nombres[i])
-
     plt.legend()
     plt.grid()
 
-    nombre_archivo = f"features_{eje_x}_vs_{eje_y}.png"
+    nombre_archivo = (
+        f"features_{eje_x}_vs_{eje_y}.png"
+    )
 
     ruta_figura = os.path.join(
         carpeta_figuras,
@@ -161,25 +265,110 @@ for i in range(len(pares)):
 
     plt.close()
 
-    print(f"\nGrafica guardada:")
+    print("\nGrafica guardada:")
     print(ruta_figura)
 
 
-# ======================================
+# ============================================================
+# GRAFICA DEL ESPECTRO
+# ============================================================
+
+print("\n======================================")
+print("       GENERANDO ESPECTRO")
+print("======================================")
+
+
+plt.figure(figsize=(12, 7))
+
+clases_encontradas = datos['etiqueta'].dropna().unique()
+
+
+for etiqueta in clases_encontradas:
+
+    # Tomar la primera ventana de esa clase
+    ventanas_clase = datos[
+        datos['etiqueta'] == etiqueta
+    ]['ventana'].unique()
+
+    if len(ventanas_clase) == 0:
+        continue
+
+    ventana = ventanas_clase[0]
+
+    grupo = datos[
+        (datos['ventana'] == ventana) &
+        (datos['etiqueta'] == etiqueta)
+    ]
+
+    x = grupo['valor'].values
+
+    if len(x) < 2:
+        continue
+
+    # FFT
+    espectro = np.abs(
+        np.fft.rfft(x)
+    )[1:]
+
+    frecuencias = np.fft.rfftfreq(
+        len(x),
+        1 / FS
+    )[1:]
+
+    # Graficar
+    plt.plot(
+        frecuencias,
+        espectro,
+        label=etiqueta
+    )
+
+
+plt.xlabel('Frecuencia (Hz)')
+plt.ylabel('Magnitud')
+plt.title('Espectro de frecuencia por clase')
+
+plt.xlim(0, 50)
+
+plt.legend()
+plt.grid()
+
+ruta_espectro = os.path.join(
+    carpeta_figuras,
+    'espectro.png'
+)
+
+plt.savefig(
+    ruta_espectro,
+    dpi=300,
+    bbox_inches='tight'
+)
+
+plt.close()
+
+
+print("\n======================================")
+print("      ESPECTRO GENERADO")
+print("======================================")
+
+print(ruta_espectro)
+
+
+# ============================================================
 # TERMINADO
-# ======================================
+# ============================================================
 
 print("\n======================================")
 print("       PROCESO TERMINADO")
 print("======================================")
 
-print("\nArchivo generado:")
-print(ruta_salida)
-
-print("\nSe probaron 3 pares de caracteristicas:")
-
-for par in pares:
-    print(f"- {par[0]} vs {par[1]}")
-
-print("\nRevisa las 3 graficas dentro de la carpeta:")
+print("\nArchivos generados en:")
 print(carpeta_figuras)
+
+print("\nBusca estas graficas:")
+
+print("- features_rango_vs_duracion.png")
+print("- features_minimo_vs_rango.png")
+print("- features_desv_vs_energia.png")
+print("- espectro.png")
+
+print("\nListo.")
