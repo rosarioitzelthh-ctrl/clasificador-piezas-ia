@@ -20,3 +20,6 @@ El `sensor.ino.txt` con doble extensión que te comenté la semana pasada sigue 
 
 ### Nota rápida (2026-09-14) - s03
 El problema de `sensor.ino.txt` con doble extensión que se comentó hace dos semanas sigue sin resolverse, y ahora hay dos copias distintas (`codigo/sensor.ino.txt` y `codigo/codigo_arduino/codigo_arduino.ino`), ninguna en la ruta que espera el curso (`codigo/sensor.ino`). El resto de la semana 3 va bien: datos balanceados (10/10/10 en `tapado`/`mal_tapado`/`no_tapado`, aunque todavía por debajo del mínimo de 30 por clase). Vale la pena resolver el nombre del archivo ya, antes del día de hardware.
+
+### Nota rápida (2026-09-21) - s05
+No veo commits de la semana 05 (`s05 bloque 1`/`s05 bloque 2`). Si tuviste un problema, cuéntamelo para que quede en la bitácora.
