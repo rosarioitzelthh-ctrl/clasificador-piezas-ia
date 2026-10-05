@@ -288,6 +288,34 @@ Sí ayudan un poco, pero no separan completamente las tres clases. En la gráfic
 
 Yo las conservaría porque pueden aportar información que no se veía tan claramente con las características anteriores. Aunque no separan completamente las clases, pueden servir junto con las demás características para que el programa tenga más información al momento de identificar cada tipo de tapa.
 
+
+## Semana 7 - Entrenamiento del clasificador (U2)
+
+### Antes de la clase
+
+### Bloque 1: Qué significa entrenar
+
+**1. ¿Con cuántos ejemplos voy a entrenar y con cuántos a probar?**
+
+Tengo 90 ejemplos en total, ya que junté 30 ventanas de cada clase: `tapado`, `mal_tapado` y `no_tapado`.
+De esos 90 ejemplos, voy a usar **72 para que el modelo aprenda** y los otros **18 para comprobar si aprendió correctamente**.
+
+---
+
+**2. ¿Qué algoritmo elijo para empezar y por qué?**
+
+Voy a empezar con el **árbol de decisión**, porque se me hace más fácil de entender. La idea es que el programa vaya tomando decisiones según las características de cada pieza hasta decidir si está `tapado`, `mal_tapado` o `no_tapado`.
+También me gusta esta opción porque puedo revisar las decisiones que tomó y entender un poco mejor cómo llegó a su resultado.
+
+---
+
+**3. ¿Por qué un modelo que acierta 100% en los datos de entrenamiento puede ser inútil?**
+Porque puede aprenderse de memoria los ejemplos que ya conoce, pero eso no quiere decir que pueda reconocer piezas nuevas correctamente.
+Por ejemplo, puede acertar todas las piezas que usé para enseñarle, pero cuando le dé una pieza que nunca había visto puede equivocarse.
+Por eso voy a guardar algunos ejemplos aparte para probarlo y comprobar si realmente aprendió a distinguir entre las tres clases.
+
+
+
 ### corección de revisión
 Estoy empezando a trabajar los errores que tenia dentro de mi revison.md y ademas completé la semana 5 y 6.
 
