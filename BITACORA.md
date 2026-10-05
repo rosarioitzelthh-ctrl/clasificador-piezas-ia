@@ -315,6 +315,30 @@ Por ejemplo, puede acertar todas las piezas que usé para enseñarle, pero cuand
 Por eso voy a guardar algunos ejemplos aparte para probarlo y comprobar si realmente aprendió a distinguir entre las tres clases.
 
 
+### Bloque 2: Entrenar el clasificador
+
+En esta parte utilicé los datos que había preparado anteriormente para que el programa aprendiera a reconocer las tres clases: `tapado`, `mal_tapado` y `no_tapado`.
+El programa utilizó 67 ejemplos para aprender y dejó 23 ejemplos aparte para comprobar qué tan bien funcionaba.
+
+**1. Exactitud del modelo**
+
+La exactitud que obtuve fue de **73.91%**.
+Esto quiere decir que el modelo logró reconocer correctamente la mayoría de los ejemplos que no había utilizado para aprender.
+
+**2. ¿Qué clases se confunden más?**
+
+Al revisar la matriz de confusión, pude ver que la clase que más problemas tuvo fue `tapado`.
+De los 8 ejemplos de `tapado`, solamente reconoció correctamente 2. Los otros 6 los confundió: 3 los marcó como `mal_tapado` y 3 como `no_tapado`.
+En cambio, los 7 ejemplos de `mal_tapado` y los 8 de `no_tapado` fueron reconocidos correctamente.
+Por lo tanto, la mayor dificultad del modelo está en distinguir `tapado` de las otras dos clases.
+
+**3. ¿Coincidió con lo que había pensado anteriormente?**
+
+Sí, en parte coincidió con lo que había observado en las gráficas de la semana anterior. Ya había notado que algunos grupos de datos estaban más juntos y podían confundirse.
+El resultado me ayudó a comprobar que `tapado` es la clase que más se parece a las otras para el modelo. Esto significa que todavía hay cosas que se pueden mejorar para que pueda distinguir mejor las tres clases.
+
+
+
 
 ### corección de revisión
 Estoy empezando a trabajar los errores que tenia dentro de mi revison.md y ademas completé la semana 5 y 6.
