@@ -338,6 +338,42 @@ Sí, en parte coincidió con lo que había observado en las gráficas de la sema
 El resultado me ayudó a comprobar que `tapado` es la clase que más se parece a las otras para el modelo. Esto significa que todavía hay cosas que se pueden mejorar para que pueda distinguir mejor las tres clases.
 
 
+## Semana 8 - Redes neuronales y comparación de modelos (U2)
+
+### Antes de la clase
+
+### Bloque 1: La red neuronal como clasificador
+
+**1. ¿Qué modelos comparé y qué resultados obtuve?**
+
+En esta actividad comparé el modelo K-NN que había hecho en la semana 7 con dos redes neuronales, una de 10 neuronas y otra de 50. Para hacer la comparación utilicé los mismos 90 ejemplos que tenía preparados, con 30 de cada clase: `tapado`, `mal_tapado` y `no_tapado`.
+
+El programa utilizó 67 ejemplos para aprender y dejó 23 para comprobar qué tan bien funcionaba cada modelo.
+
+Los resultados que obtuve fueron los siguientes:
+
+| Modelo | Exactitud train | Exactitud test |
+|---|---:|---:|
+| K-NN de la semana 7 | 77.61% | 73.91% |
+| Red de 10 neuronas | 98.51% | 78.26% |
+| Red de 50 neuronas | 100.00% | 82.61% |
+
+**2. ¿Qué modelo elijo para mi proyecto y por qué?**
+
+Por los resultados que obtuve, elegiría la red neuronal de 50 neuronas, porque fue la que tuvo el mejor resultado al probarla con los datos que no utilizó para aprender, con una exactitud de 82.61%.
+
+El modelo K-NN obtuvo 73.91% y la red de 10 neuronas obtuvo 78.26%. Por eso, la red de 50 neuronas parece ser la mejor opción de las tres que probé. Sin embargo, todavía necesito comprobar cómo funciona con nuevas lecturas del sensor antes de utilizarla en el proyecto completo.
+
+**3. ¿Por qué una red neuronal no siempre gana?**
+
+Una red neuronal no siempre obtiene mejores resultados porque necesita suficientes ejemplos para aprender correctamente. En mi caso, solamente tengo 90 ejemplos, por lo que todavía puede equivocarse al reconocer piezas nuevas.
+
+También observé que la red de 50 neuronas obtuvo 100% en el entrenamiento, pero bajó a 82.61% en las pruebas. Esto significa que reconoció todos los ejemplos que utilizó para aprender, pero no logró reconocer correctamente todos los ejemplos que se dejaron aparte.
+
+Con esta actividad entendí que no siempre gana el modelo más complicado. Lo importante es comparar los resultados y elegir el que funcione mejor para el proyecto, tomando en cuenta que todavía se pueden mejorar los datos y las pruebas.
+
+
+
 
 
 ### corección de revisión
