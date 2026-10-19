@@ -23,3 +23,6 @@ El problema de `sensor.ino.txt` con doble extensión que se comentó hace dos se
 
 ### Nota rápida (2026-09-21) - s05
 No veo commits de la semana 05 (`s05 bloque 1`/`s05 bloque 2`). Si tuviste un problema, cuéntamelo para que quede en la bitácora.
+
+### Nota rápida (2026-10-19) - s07
+Muy bien: 90 ventanas balanceadas, exactitud de 0.74 reportada con su matriz, y la lectura es concreta (de 8 `tapado` solo acertó 2; `mal_tapado` y `no_tapado` sin errores). Eso es justo lo que la guía pedía. El siguiente paso natural es la autopsia: toma dos o tres de esos `tapado` mal clasificados, búscalos por su `ventana` en `datos_limpios.csv`, grafícalos junto a uno bien clasificado y escribe si tú los habrías distinguido a ojo. Detalle menor: en el bloque 1 dices 72/18, pero tu código usa `test_size=0.25` y partió 67/23; deja el mismo número en los dos lados.
