@@ -372,7 +372,34 @@ También observé que la red de 50 neuronas obtuvo 100% en el entrenamiento, per
 
 Con esta actividad entendí que no siempre gana el modelo más complicado. Lo importante es comparar los resultados y elegir el que funcione mejor para el proyecto, tomando en cuenta que todavía se pueden mejorar los datos y las pruebas.
 
+## Semana 8 – Bloque 2: Cerrar el bucle
 
+### Tabla de acciones
+
+| Carácter | Clase | Acción del actuador | ¿Por qué tiene sentido en el proyecto? |
+|---|---|---|---|
+| A | tapado | Encender la lámpara verde del PLC. | Indica que la pieza está correctamente tapada y puede continuar. |
+| B | mal_tapado | Encender la lámpara amarilla del PLC. | Indica que la pieza tiene un problema y necesita revisión. |
+| C | no_tapado | Encender la lámpara roja del PLC. | Indica que la pieza no tiene tapa y debe identificarse como defectuosa. |
+| 0 | Reposo | Apagar las lámparas. | Indica que el sistema está en reposo y no hay una clasificación activa. |
+
+### Comunicación y funcionamiento
+
+Se utiliza una placa Arduino UNO conectada a la computadora mediante el puerto serial COM4, con una velocidad de comunicación de 115200 baudios.
+
+El sensor ultrasónico HC-SR04 está conectado a los pines TRIG 9 y ECHO 10. Arduino envía las mediciones de distancia a Python, donde se reciben 200 muestras por ventana.
+
+En Python se utilizan las siguientes funciones:
+
+- `capturar_ventana()`: recibe las muestras del sensor.
+- `limpiar()`: elimina los datos incorrectos y prepara las lecturas.
+- `calcular_features()`: calcula las características necesarias para la clasificación.
+
+Después, el modelo K-NN identifica el estado de la pieza y Python envía a Arduino el carácter correspondiente: A, B, C o 0.
+
+### Resultado esperado
+
+Completar el ciclo de comunicación para que el sistema pueda recibir las mediciones, clasificar las piezas y enviar una orden de respuesta según el resultado obtenido.
 
 
 
