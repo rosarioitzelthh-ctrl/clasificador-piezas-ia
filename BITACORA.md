@@ -289,7 +289,7 @@ Sí ayudan un poco, pero no separan completamente las tres clases. En la gráfic
 Yo las conservaría porque pueden aportar información que no se veía tan claramente con las características anteriores. Aunque no separan completamente las clases, pueden servir junto con las demás características para que el programa tenga más información al momento de identificar cada tipo de tapa.
 
 
-## Semana 7 - Entrenamiento del clasificador (U2)
+# Semana 7 - Entrenamiento del clasificador (U2)
 
 ### Antes de la clase
 
@@ -298,7 +298,8 @@ Yo las conservaría porque pueden aportar información que no se veía tan clara
 **1. ¿Con cuántos ejemplos voy a entrenar y con cuántos a probar?**
 
 Tengo 90 ejemplos en total, ya que junté 30 ventanas de cada clase: `tapado`, `mal_tapado` y `no_tapado`.
-De esos 90 ejemplos, voy a usar **72 para que el modelo aprenda** y los otros **18 para comprobar si aprendió correctamente**.
+
+De esos 90 ejemplos, utilicé **67 para entrenar el modelo** y **23 para probar qué tan bien funcionaba**, aproximadamente el 75% para entrenamiento y el 25% para prueba.
 
 ---
 
@@ -338,7 +339,7 @@ Sí, en parte coincidió con lo que había observado en las gráficas de la sema
 El resultado me ayudó a comprobar que `tapado` es la clase que más se parece a las otras para el modelo. Esto significa que todavía hay cosas que se pueden mejorar para que pueda distinguir mejor las tres clases.
 
 
-## Semana 8 - Redes neuronales y comparación de modelos (U2)
+# Semana 8 - Redes neuronales y comparación de modelos (U2)
 
 ### Antes de la clase
 
@@ -408,3 +409,10 @@ Estoy empezando a trabajar los errores que tenia dentro de mi revison.md y adema
 
 ### Avance del proyecto
 Por el momento corregí lo que tenia mal
+
+### Correcciones y observaciones de revisión – 18/11/2026
+
+Se revisaron los resultados del entrenamiento del clasificador y se corrigió la cantidad de datos utilizados para entrenamiento y prueba, ya que originalmente había una diferencia entre lo escrito y lo que realmente ejecutaba el código.
+
+También quedó pendiente revisar algunas ventanas de la clase `tapado` que el modelo clasificó incorrectamente, comparándolas con una ventana que sí reconoció correctamente. Esto permitirá observar las diferencias entre las señales y entender mejor por qué el modelo tuvo dificultades para clasificarlas.
+
