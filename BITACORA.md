@@ -436,6 +436,32 @@ Al observar la gráfica, pude notar que las tres clases aparecen mezcladas y no 
 
 Sí, encontré varios puntos alejados del grupo principal. Los más notorios pertenecen a las ventanas 0, 30 y 5, todas de la clase `tapado`. Esto indica que sus datos tienen un comportamiento diferente al de las demás ventanas. Todavía queda pendiente revisar sus señales originales para conocer por qué son tan diferentes.
 
+# Semana 11 - Agrupamiento: K-Means y DBSCAN (U3)
+
+### Antes de la clase
+
+### Bloque 1: K-Means, agrupar por cercanía
+
+**1. Tabla cruzada de los resultados**
+
+Al ejecutar K-Means obtuve la siguiente tabla, donde se muestra cómo se repartieron mis tres clases entre los grupos encontrados:
+
+| Clase original | Grupo 0 | Grupo 1 | Grupo 2 |
+|---|---:|---:|---:|
+| mal_tapado | 10 | 0 | 20 |
+| no_tapado | 6 | 0 | 24 |
+| tapado | 10 | 1 | 19 |
+
+**2. ¿K-Means encontró tus clases o no? ¿Qué te dice eso de tu problema?**
+
+K-Means encontró tres grupos, pero no logró separar correctamente mis tres clases. En la tabla se puede observar que los ejemplos de diferentes clases terminaron juntos en los mismos grupos. Esto significa que algunas de mis piezas tienen características parecidas y que no es tan fácil diferenciarlas solamente por sus datos.
+
+**3. Si no las encontró, ¿qué crees que separó en su lugar?**
+
+Creo que el programa agrupó los datos tomando en cuenta qué tan parecidas eran sus lecturas, sin importar si eran `tapado`, `mal_tapado` o `no_tapado`. Por eso, algunas ventanas de diferentes clases terminaron en el mismo grupo. Esto me permite ver que los datos pueden tener semejanzas aunque perten
+
+
+
 
 
 ### corección de revisión

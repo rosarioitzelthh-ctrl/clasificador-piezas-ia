@@ -18,7 +18,7 @@ y = features['etiqueta']
 X_esc = StandardScaler().fit_transform(X)
 
 # Aplicar PCA para obtener dos componentes
-pca = PCA(n_components=2)
+pca = PCA(n_components=3)
 componentes = pca.fit_transform(X_esc)
 
 # Mostrar los porcentajes de varianza
