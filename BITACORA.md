@@ -422,6 +422,20 @@ Si pasara un objeto diferente, como un tornillo o un pedazo de cartón, mi model
 
 PCA busca hacer que los datos sean más fáciles de entender, juntando la información más importante y quitando lo que no es tan necesario. Así podemos hacer gráficas más sencillas y observar mejor las diferencias y semejanzas entre los datos.
 
+### Bloque 2: PCA sobre mi dataset
+
+**1. ¿Qué porcentaje de varianza explican tus dos primeras componentes?**
+
+La primera componente explica el 35.23% y la segunda el 33.51%. Entre las dos conservan el 68.74% de la variación de mis datos.
+
+**2. ¿Tus clases se separan solas en el plano de PCA? ¿Qué significa que sí o que no?**
+
+Al observar la gráfica, pude notar que las tres clases aparecen mezcladas y no se separan completamente. Esto significa que tienen algunas características parecidas y que no es tan fácil diferenciarlas solamente con esta gráfica.
+
+**3. ¿Viste algún punto atípico, cuál ventana era y qué encontraste al graficar su señal?**
+
+Sí, encontré varios puntos alejados del grupo principal. Los más notorios pertenecen a las ventanas 0, 30 y 5, todas de la clase `tapado`. Esto indica que sus datos tienen un comportamiento diferente al de las demás ventanas. Todavía queda pendiente revisar sus señales originales para conocer por qué son tan diferentes.
+
 
 
 ### corección de revisión
