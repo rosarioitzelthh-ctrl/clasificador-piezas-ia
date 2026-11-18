@@ -401,6 +401,26 @@ Después, el modelo K-NN identifica el estado de la pieza y Python envía a Ardu
 ### Resultado esperado
 
 Completar el ciclo de comunicación para que el sistema pueda recibir las mediciones, clasificar las piezas y enviar una orden de respuesta según el resultado obtenido.
+# semana 9 - SE HIZO LA EVALUACIÓN DE LOS COMPAÑEROS DE MI EQUIPO SATISFACTORIAMENTE.
+EVALUACIÓN HECHA.
+
+# Semana 10 - Aprendizaje no supervisado y PCA (U3)
+
+### Antes de la clase
+
+### Bloque 1: Aprender sin etiquetas
+
+**1. ¿Cuántas características tiene tu `features.csv` y por qué eso es difícil de visualizar?**
+
+Mi archivo `features.csv` tiene 7 características que describen el comportamiento de cada ventana del sensor. Esto puede ser complicado de visualizar porque no puedo representar todas las características en una sola gráfica. Si quiero compararlas, tendría que hacer varias gráficas diferentes y podría ser más difícil encontrar las diferencias entre los datos.
+
+**2. ¿Qué le pasaría a tu sistema actual si por la banda pasara un objeto que no es ninguna de tus tres clases? ¿Qué respondería tu modelo?**
+
+Si pasara un objeto diferente, como un tornillo o un pedazo de cartón, mi modelo intentaría clasificarlo como una de las tres clases que conoce: `tapado`, `mal_tapado` o `no_tapado`. Esto podría provocar una clasificación incorrecta, porque el modelo solamente fue entrenado para reconocer esos tres tipos de piezas.
+
+**3. Con tus palabras, ¿qué busca PCA?**
+
+PCA busca hacer que los datos sean más fáciles de entender, juntando la información más importante y quitando lo que no es tan necesario. Así podemos hacer gráficas más sencillas y observar mejor las diferencias y semejanzas entre los datos.
 
 
 
