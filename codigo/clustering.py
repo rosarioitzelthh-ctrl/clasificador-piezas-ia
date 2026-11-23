@@ -1,24 +1,31 @@
 
-# clustering.py - agrupa los datos sin utilizar sus etiquetas
+# clustering.py - K-Means y DBSCAN
 
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans, DBSCAN
 from sklearn.decomposition import PCA
 import os
 
-# Leer los datos
+# ========================================
+# LEER Y PREPARAR LOS DATOS
+# ========================================
+
 features = pd.read_csv('datos/features.csv')
 
-# Separar las caracteristicas y las etiquetas
 X = features.drop(columns=['ventana', 'etiqueta'])
 y = features['etiqueta']
 
-# Preparar los datos
-X_esc = StandardScaler().fit_transform(X)
+escalador = StandardScaler()
+X_esc = escalador.fit_transform(X)
 
-# Aplicar K-Means para encontrar 3 grupos
+os.makedirs('figuras', exist_ok=True)
+
+# ========================================
+# BLOQUE 1: K-MEANS
+# ========================================
+
 kmeans = KMeans(
     n_clusters=3,
     n_init=10,
@@ -27,7 +34,6 @@ kmeans = KMeans(
 
 grupos = kmeans.fit_predict(X_esc)
 
-# Mostrar la tabla que compara los grupos con las clases originales
 print("\n========================================")
 print("       RESULTADOS DE K-MEANS")
 print("========================================")
@@ -39,14 +45,16 @@ tabla = pd.crosstab(
     colnames=['Grupo encontrado']
 )
 
-print("\nTabla de comparacion:")
 print(tabla)
 
-# Aplicar PCA para representar los datos en dos dimensiones
+# PCA para representar los datos
 pca = PCA(n_components=2)
 componentes = pca.fit_transform(X_esc)
 
-# Crear la grafica
+pc1 = pca.explained_variance_ratio_[0] * 100
+pc2 = pca.explained_variance_ratio_[1] * 100
+
+# Gráfica K-Means
 plt.figure(figsize=(11, 8))
 
 colores = ['royalblue', 'darkorange', 'forestgreen']
@@ -61,33 +69,121 @@ for grupo in sorted(set(grupos)):
         color=colores[grupo],
         s=65,
         alpha=0.75,
-        edgecolors='black',
-        linewidths=0.5
+        edgecolors='black'
     )
-
-# Agregar porcentajes y nombres
-pc1 = pca.explained_variance_ratio_[0] * 100
-pc2 = pca.explained_variance_ratio_[1] * 100
 
 plt.xlabel(f'PC1 ({pc1:.2f}%)')
 plt.ylabel(f'PC2 ({pc2:.2f}%)')
 plt.title('Agrupamiento K-Means de los datos')
-
-plt.legend(title='Grupos')
-plt.grid(True, alpha=0.3)
+plt.legend()
+plt.grid(alpha=0.3)
 plt.tight_layout()
 
-# Guardar la grafica
-os.makedirs('figuras', exist_ok=True)
+plt.savefig(
+    'figuras/clustering_kmeans.png',
+    dpi=300,
+    bbox_inches='tight'
+)
+
+plt.show()
+
+# ========================================
+# BLOQUE 2: DBSCAN
+# ========================================
+
+print("\n========================================")
+print("       RESULTADOS DE DBSCAN")
+print("========================================")
+
+valores_eps = [1.5, 2.0, 2.5, 3.0, 3.5, 4.0]
+
+print("\nTabla de prueba:")
+print("eps | Grupos encontrados | Puntos de ruido")
+
+for eps in valores_eps:
+
+    dbscan = DBSCAN(
+        eps=eps,
+        min_samples=5
+    )
+
+    grupos_db = dbscan.fit_predict(X_esc)
+
+    n_grupos = len(set(grupos_db)) - (1 if -1 in grupos_db else 0)
+    n_ruido = list(grupos_db).count(-1)
+
+    print(f"{eps} | {n_grupos} | {n_ruido}")
+
+# ========================================
+# SELECCIONAR EPS
+# ========================================
+
+# Valor provisional. Se ajustará según la tabla obtenida.
+eps_elegido = 2.5
+
+dbscan = DBSCAN(
+    eps=eps_elegido,
+    min_samples=5
+)
+
+grupos_db = dbscan.fit_predict(X_esc)
+
+n_grupos = len(set(grupos_db)) - (1 if -1 in grupos_db else 0)
+n_ruido = list(grupos_db).count(-1)
+
+print("\nResultados finales de DBSCAN:")
+print("eps elegido:", eps_elegido)
+print("Grupos encontrados:", n_grupos)
+print("Puntos marcados como ruido:", n_ruido)
+
+# ========================================
+# GRAFICAR DBSCAN
+# ========================================
+
+plt.figure(figsize=(11, 8))
+
+for grupo in sorted(set(grupos_db)):
+
+    mascara = grupos_db == grupo
+
+    if grupo == -1:
+        plt.scatter(
+            componentes[mascara, 0],
+            componentes[mascara, 1],
+            marker='x',
+            color='red',
+            s=120,
+            linewidths=2,
+            label='Ruido (-1)'
+        )
+
+    else:
+        plt.scatter(
+            componentes[mascara, 0],
+            componentes[mascara, 1],
+            s=65,
+            alpha=0.75,
+            edgecolors='black',
+            label=f'Grupo {grupo}'
+        )
+
+plt.xlabel(f'PC1 ({pc1:.2f}%)')
+plt.ylabel(f'PC2 ({pc2:.2f}%)')
+plt.title(f'DBSCAN - eps={eps_elegido}, min_samples=5')
+plt.legend()
+plt.grid(alpha=0.3)
+plt.tight_layout()
+
 plt.savefig(
     'figuras/clustering.png',
     dpi=300,
     bbox_inches='tight'
 )
 
-print("\nGrafica guardada en figuras/clustering.png")
+plt.show()
+
+print("\nGrafica DBSCAN guardada en figuras/clustering.png")
+
 print("\n========================================")
 print("          FIN DEL ANALISIS")
 print("========================================")
-
-plt.show()

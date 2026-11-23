@@ -461,6 +461,31 @@ K-Means encontró tres grupos, pero no logró separar correctamente mis tres cla
 Creo que el programa agrupó los datos tomando en cuenta qué tan parecidas eran sus lecturas, sin importar si eran `tapado`, `mal_tapado` o `no_tapado`. Por eso, algunas ventanas de diferentes clases terminaron en el mismo grupo. Esto me permite ver que los datos pueden tener semejanzas aunque perten
 
 
+### Bloque 2: DBSCAN, agrupar por densidad
+
+**1. Tabla de valores de `eps` y resultados**
+
+| eps | Grupos encontrados | Puntos de ruido |
+|---:|---:|---:|
+| 1.5 | 1 | 33 |
+| 2.0 | 1 | 17 |
+| 2.5 | 1 | 9 |
+| 3.0 | 1 | 8 |
+| 3.5 | 1 | 7 |
+| 4.0 | 1 | 4 |
+
+Elegí el valor de `eps = 2.5`, porque encontró un grupo y marcó 9 puntos como ruido. Consideré que era una opción adecuada porque no clasificó demasiados datos como ruido y permitió identificar algunos puntos que se encuentran alejados de las zonas con mayor concentración.
+
+**2. ¿Cuántos grupos encontró DBSCAN y coincide con mis tres clases?**
+
+DBSCAN encontró solamente un grupo y no logró separar mis tres clases originales. Esto significa que, utilizando las características de mis datos, encontró una zona principal donde se concentran las lecturas. También identificó 9 puntos como ruido, porque no cumplían con las condiciones necesarias para pertenecer a una zona suficientemente poblada.
+
+**3. ¿Cuántas piezas raras quedaron marcadas como ruido?**
+
+Esta prueba queda pendiente porque todavía falta integrar el archivo `anomalias.csv` con los datos normales. Es necesario realizar esa comparación para conocer cuántas de las piezas raras fueron identificadas como ruido.
+
+
+
 
 
 
